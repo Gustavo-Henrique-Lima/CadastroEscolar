@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Turma implements Serializable{
 
@@ -19,6 +21,7 @@ public class Turma implements Serializable{
 	private Long id;
 	private String nome;
 	private int capacidade;
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="id_escola")
 	private Escola escola;

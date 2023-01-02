@@ -14,8 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 public class Escola implements Serializable{
 
@@ -27,7 +25,6 @@ public class Escola implements Serializable{
 	private String nome;
 	@OneToOne(cascade=CascadeType.ALL)
 	private Endereco endereco;
-	@JsonIgnore
 	@OneToMany(mappedBy="escola")
 	private List<Turma> turmas=new ArrayList<>();
 	
