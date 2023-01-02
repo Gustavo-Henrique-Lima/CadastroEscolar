@@ -1,19 +1,25 @@
 package com.gustavonascimento.CadastroEscolar.entitys;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
 public class Escola implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -21,7 +27,10 @@ public class Escola implements Serializable{
 	private String nome;
 	@OneToOne(cascade=CascadeType.ALL)
 	private Endereco endereco;
-
+	@JsonIgnore
+	@OneToMany(mappedBy="escola")
+	private List<Turma> turmas=new ArrayList<>();
+	
 	public Escola()
 	{}
 
@@ -61,6 +70,11 @@ public class Escola implements Serializable{
 	public void setEndereco(Endereco endereco) 
 	{
 		this.endereco = endereco;
+	}
+	
+	public List<Turma> getTurmas() 
+	{
+		return turmas;
 	}
 
 	@Override
