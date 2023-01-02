@@ -1,5 +1,6 @@
 package com.gustavonascimento.CadastroEscolar.entitys;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
@@ -9,8 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 
-public class Escola {
+public class Escola implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
