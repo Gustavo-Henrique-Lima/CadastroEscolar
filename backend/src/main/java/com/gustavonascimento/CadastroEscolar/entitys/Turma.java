@@ -1,13 +1,17 @@
 package com.gustavonascimento.CadastroEscolar.entitys;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -25,6 +29,11 @@ public class Turma implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="id_escola")
 	private Escola escola;
+	@ManyToMany
+	@JoinTable(name = "alunos_turma",
+	joinColumns = @JoinColumn(name="turma_id"),
+	inverseJoinColumns = @JoinColumn(name="aluno_id"))
+	private Set<Aluno> alunos=new HashSet<>();
 	
 	public Turma() 
 	{}
@@ -76,6 +85,11 @@ public class Turma implements Serializable{
 	public void setEscola(Escola escola) 
 	{
 		this.escola = escola;
+	}
+
+	public Set<Aluno> getAlunos() 
+	{
+		return alunos;
 	}
 
 	@Override

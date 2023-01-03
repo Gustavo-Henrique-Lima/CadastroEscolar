@@ -2,15 +2,21 @@ package com.gustavonascimento.CadastroEscolar.entitys;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Aluno implements Serializable{
@@ -23,8 +29,12 @@ public class Aluno implements Serializable{
 	private String nome;
 	@JsonFormat(pattern="dd-MM-yyyy")
 	private LocalDate dataNascimento;
+	@OneToOne(cascade=CascadeType.ALL)
 	private Endereco endereco;
-	
+	@ManyToMany(mappedBy = "alunos")
+	@JsonIgnore
+	private Set<Turma> turmas=new HashSet<>();
+
 	public Aluno()
 	{}
 
@@ -76,6 +86,11 @@ public class Aluno implements Serializable{
 	public void setEndereco(Endereco endereco) 
 	{
 		this.endereco = endereco;
+	}
+
+	public Set<Turma> getTurmas() 
+	{
+		return turmas;
 	}
 
 	@Override

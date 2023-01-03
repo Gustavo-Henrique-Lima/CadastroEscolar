@@ -39,9 +39,16 @@ public class Instantiation implements CommandLineRunner{
 		
 		Aluno a1=new Aluno(null,"Gustavo",LocalDate.of(2001, 3, 29),new Endereco(null, "Rua da baixinha,35", "A", "São Pedro", "Belo Jardim", "PE"));
 		Aluno a2=new Aluno(null,"Guilherme",LocalDate.of(2002, 4, 03),new Endereco(null, "Rua da baixinha,35",null, "São Pedro", "Belo Jardim", "PE"));
-
+		
 		repoEsc.saveAll(Arrays.asList(e1,e2));
 		repoTurm.saveAll(Arrays.asList(t1,t2,t3));
 		repoAlun.saveAll(Arrays.asList(a1,a2));
+		
+		t1.getAlunos().add(a1);
+		t1.getAlunos().add(a2);
+		t2.getAlunos().add(a1);
+		t3.getAlunos().add(a2);
+		
+		repoTurm.saveAll(Arrays.asList(t1,t2,t3));;
 	}
 }
