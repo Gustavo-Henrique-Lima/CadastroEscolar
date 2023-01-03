@@ -23,6 +23,7 @@ public class Escola implements Serializable{
 	private Long id;
 	@NotEmpty(message="O nome é obrigatório")
 	private String nome;
+	@NotEmpty(message="O endereço é obrigatório")
 	@OneToOne(cascade=CascadeType.ALL)
 	private Endereco endereco;
 	@OneToMany(mappedBy="escola")
