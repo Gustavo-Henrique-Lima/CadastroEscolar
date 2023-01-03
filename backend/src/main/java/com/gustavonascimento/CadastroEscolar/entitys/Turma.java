@@ -29,6 +29,7 @@ public class Turma implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="id_escola")
 	private Escola escola;
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "alunos_turma",
 	joinColumns = @JoinColumn(name="turma_id"),

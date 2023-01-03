@@ -16,7 +16,6 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Aluno implements Serializable{
@@ -32,7 +31,6 @@ public class Aluno implements Serializable{
 	@OneToOne(cascade=CascadeType.ALL)
 	private Endereco endereco;
 	@ManyToMany(mappedBy = "alunos")
-	@JsonIgnore
 	private Set<Turma> turmas=new HashSet<>();
 
 	public Aluno()
