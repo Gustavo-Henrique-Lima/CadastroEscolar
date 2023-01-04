@@ -50,6 +50,13 @@ public class EscolaResource {
 		return ResponseEntity.created(uri).body(escola);
 	}
 	
+	@PutMapping(value="/{idEsc}/{idTurm}")
+	public ResponseEntity<Void> addTurma(@PathVariable Long idEsc,@PathVariable Long idTurm)
+	{
+		servEsc.addTurma(idEsc,idTurm);
+		return ResponseEntity.ok().build();
+	}
+	
 	@PutMapping(value= "/{id}")
 	public ResponseEntity<Escola> atualizar(@PathVariable Long id, @RequestBody Escola escola)
 	{

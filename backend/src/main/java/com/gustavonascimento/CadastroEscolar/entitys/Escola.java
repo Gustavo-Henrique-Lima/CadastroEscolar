@@ -1,9 +1,9 @@
 package com.gustavonascimento.CadastroEscolar.entitys;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -27,7 +27,7 @@ public class Escola implements Serializable{
 	@OneToOne(cascade=CascadeType.ALL)
 	private Endereco endereco;
 	@OneToMany(mappedBy="escola")
-	private List<Turma> turmas=new ArrayList<>();
+	private Set<Turma> turmas=new HashSet<>();
 	
 	public Escola()
 	{}
@@ -70,7 +70,7 @@ public class Escola implements Serializable{
 		this.endereco = endereco;
 	}
 	
-	public List<Turma> getTurmas() 
+	public Set<Turma> getTurmas() 
 	{
 		return turmas;
 	}
