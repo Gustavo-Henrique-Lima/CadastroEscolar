@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import com.gustavonascimento.CadastroEscolar.entitys.Escola;
 import com.gustavonascimento.CadastroEscolar.entitys.Turma;
+import com.gustavonascimento.CadastroEscolar.repository.EscolaRepository;
 import com.gustavonascimento.CadastroEscolar.repository.TurmaRepository;
 import com.gustavonascimento.CadastroEscolar.service.exceptions.DatabaseException;
 import com.gustavonascimento.CadastroEscolar.service.exceptions.ResourceNotFoundException;
@@ -19,6 +21,9 @@ public class TurmaService {
 	
 	@Autowired
 	private TurmaRepository repoTur;
+	
+	@Autowired
+	private EscolaRepository repoEsc;
 	
 	public List<Turma> findall()
 	{
@@ -71,5 +76,27 @@ public class TurmaService {
 		turma1.setNome(turma2.getNome());
 		turma1.setEscola(turma2.getEscola());
 		turma1.setCapacidade(turma2.getCapacidade());
+	}
+	
+	public void addTurma(Long idEscola,Long idTurma)
+	{
+		try
+		{
+			Escola esc=repoEsc.getReferenceById(idEscola);
+			try
+			{
+				Turma tur=repoTur.getReferenceById(idTurma);	
+				tur.setEscola(esc);
+				repoTur.save(tur);
+			}
+			catch(EntityNotFoundException e)
+			{
+				throw new ResourceNotFoundException(idTurma);
+			}
+		}
+		catch(DataIntegrityViolationException e)
+		{
+			throw new ResourceNotFoundException(idEscola);
+		}
 	}
 }

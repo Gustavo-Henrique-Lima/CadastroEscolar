@@ -41,10 +41,11 @@ public class TurmaResource {
 		return ResponseEntity.ok(turma);
 	}
 	
-	@PostMapping
-	public ResponseEntity<Turma> insert(@Valid @RequestBody Turma turma)
+	@PostMapping(value="/{id}")
+	public ResponseEntity<Turma> insert(@PathVariable Long id,@Valid @RequestBody Turma turma)
 	{
 		turma=servTur.insert(turma);
+		servTur.addTurma(id,turma.getId());
 		URI uri=ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(turma.getId()).toUri();
 		return ResponseEntity.created(uri).body(turma);
 	}

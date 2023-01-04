@@ -11,9 +11,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.gustavonascimento.CadastroEscolar.entitys.Escola;
-import com.gustavonascimento.CadastroEscolar.entitys.Turma;
 import com.gustavonascimento.CadastroEscolar.repository.EscolaRepository;
-import com.gustavonascimento.CadastroEscolar.repository.TurmaRepository;
 import com.gustavonascimento.CadastroEscolar.service.exceptions.DatabaseException;
 import com.gustavonascimento.CadastroEscolar.service.exceptions.ResourceNotFoundException;
 
@@ -23,9 +21,6 @@ public class EscolaService {
 
 	@Autowired
 	private EscolaRepository repoEsc;
-	
-	@Autowired
-	private TurmaRepository repoTurm;
 	
 	public List<Escola> findAll()
 	{
@@ -70,28 +65,6 @@ public class EscolaService {
 		catch(EntityNotFoundException e) 
 		{
 			throw new ResourceNotFoundException(id);
-		}
-	}
-	
-	public void addTurma(Long idEscola,Long idTurma)
-	{
-		try
-		{
-			Escola esc=repoEsc.getReferenceById(idEscola);
-			try
-			{
-				Turma tur=repoTurm.getReferenceById(idTurma);	
-				tur.setEscola(esc);
-				repoTurm.save(tur);
-			}
-			catch(EntityNotFoundException e)
-			{
-				throw new ResourceNotFoundException(idTurma);
-			}
-		}
-		catch(DataIntegrityViolationException e)
-		{
-			throw new ResourceNotFoundException(idEscola);
 		}
 	}
 	
