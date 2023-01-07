@@ -29,6 +29,10 @@ public class AlunoService {
 	{
 		return repoAlu.findAll();
 	}
+	public Aluno insert(Aluno aluno)
+	{
+		return repoAlu.save(aluno);
+	}
 	
 	public Aluno findById(Long id)
 	{
@@ -76,5 +80,27 @@ public class AlunoService {
 		aluno1.setNome(aluno2.getNome());
 		aluno1.setDataNascimento(aluno2.getDataNascimento());
 		aluno1.setEndereco(aluno2.getEndereco());
+	}
+	
+	public void addAluno(Long idTurma,Long idAluno)
+	{
+		try
+		{
+			Turma turma=repoTurm.getReferenceById(idTurma);
+			try
+			{
+				Aluno aluno=repoAlu.getReferenceById(idAluno);
+				turma.getAlunos().add(aluno);
+				repoTurm.save(turma);
+			}
+			catch(EntityNotFoundException e)
+			{
+				throw new ResourceNotFoundException(idTurma);
+			}
+		}
+		catch(EntityNotFoundException e)
+		{
+			throw new ResourceNotFoundException(idTurma);
+		}
 	}
 }

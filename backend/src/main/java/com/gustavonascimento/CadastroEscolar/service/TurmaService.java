@@ -94,9 +94,9 @@ public class TurmaService {
 				throw new ResourceNotFoundException(idTurma);
 			}
 		}
-		catch(DataIntegrityViolationException e)
+		catch(EntityNotFoundException e)
 		{
-			throw new ResourceNotFoundException(idEscola);
+			throw new ResourceNotFoundException(idTurma);
 		}
 	}
 }
