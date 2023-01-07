@@ -62,7 +62,7 @@ public class AlunoResource {
 	public ResponseEntity<Aluno> insert(@PathVariable Long id,@RequestBody Aluno aluno)
 	{
 		Turma turma=servTur.findById(id);
-		if(!turma.equals(null))
+		if(!turma.equals(null) && turma.getAlunos().size()<turma.getCapacidade())
 		{
 			aluno=servAlu.insert(aluno);
 			servAlu.addAluno(id,aluno.getId());
