@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.gustavonascimento.CadastroEscolar.entitys.Escola;
 import com.gustavonascimento.CadastroEscolar.entitys.Turma;
+import com.gustavonascimento.CadastroEscolar.service.EscolaService;
 import com.gustavonascimento.CadastroEscolar.service.TurmaService;
 
 @RestController
@@ -26,6 +28,9 @@ public class TurmaResource {
 
 	@Autowired
 	private TurmaService servTur;
+	
+	@Autowired
+	private EscolaService servEsc;
 	
 	@GetMapping
 	public ResponseEntity<List<Turma>> findAll()
@@ -44,10 +49,15 @@ public class TurmaResource {
 	@PostMapping(value="/{id}")
 	public ResponseEntity<Turma> insert(@PathVariable Long id,@Valid @RequestBody Turma turma)
 	{
-		turma=servTur.insert(turma);
-		servTur.addTurma(id,turma.getId());
-		URI uri=ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(turma.getId()).toUri();
-		return ResponseEntity.created(uri).body(turma);
+		Escola escola=servEsc.findById(id);
+		if(!escola.equals(null))
+		{
+			turma=servTur.insert(turma);
+			servTur.addTurma(id,turma.getId());
+			URI uri=ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(turma.getId()).toUri();
+			return ResponseEntity.created(uri).body(turma);
+		}
+		return ResponseEntity.badRequest().body(turma);
 	}
 	
 	@PutMapping(value="/{id}")
