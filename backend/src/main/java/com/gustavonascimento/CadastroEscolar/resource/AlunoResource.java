@@ -69,6 +69,13 @@ public class AlunoResource {
 			URI uri=ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(turma.getId()).toUri();
 			return ResponseEntity.created(uri).body(aluno);
 		}
-		return ResponseEntity.badRequest().body(aluno);
+		return ResponseEntity.badRequest().build();
+	}
+	
+	@GetMapping(value="/aluno={id1}/turma={id2}")
+	public ResponseEntity<Void> findByNick(@PathVariable Long id1,@PathVariable Long id2)
+	{
+		servAlu.addAluno(id1, id2);
+		return ResponseEntity.ok().build();
 	}
 }
