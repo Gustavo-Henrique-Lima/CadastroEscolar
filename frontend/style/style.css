@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+*
+{
+    margin: 0;
+    font-family: "Quicksand", sans-serif;
+    text-decoration: none;
+}
+.header
+{
+    margin-top: 0px;
+}
+
+ul
+{ 
+    margin-top: 1rem;
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+}
+#container
+{
+    display: flex;
+}
+.opt
+{
+    margin-left: 1rem;
+    width:10%;
+    display: block;
+    margin-top: 10%;
+}
+.opt p
+{
+ margin-bottom: 1rem;
+}
+.info
+{
+    margin-left: 30%;
+    margin-top: 10%;
+}
