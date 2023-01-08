@@ -7,9 +7,12 @@
     <title>Cadastro Escolar</title>
     <link rel="stylesheet" href="./style/style.css">
 </head>
-<body onload="main()">
+<body onload="getAlunos()">
     <div class="header">
         <ul>
+            <li>
+                <a href="index.html">Voltar</a>
+            </li>
             <li>
                 <a href="aluno.html">Aluno</a>
             </li>
@@ -24,20 +27,15 @@
    <div id="container">
         <div class="opt">
             <p>
-                Formulário
-            </p>
-            <p>
                 Listagem
             </p>
+            <p>
+                Formulário
+            </p>
         </div>
-        <div class="info">
-            <h2>
-                Atualmente contamos com:
-            </h2>
-            <div id="tabela">
-                
-            </div>
-        </div>
+        <table id="info">
+           
+        </table>
    </div>
    <script src="./script/script.js"></script>
 </body>

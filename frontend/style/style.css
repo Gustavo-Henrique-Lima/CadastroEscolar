@@ -5,6 +5,9 @@
     font-family: "Quicksand", sans-serif;
     text-decoration: none;
 }
+a{
+    color: black;
+}
 .header
 {
     margin-top: 0px;
